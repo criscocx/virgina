@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=Sora:wght@600;700&display=swap">
+<title>Gestión · Prototipo</title>
+<style>
+:root{--bg:#f2f5f4;--card:#fff;--tx:#14201f;--mu:#5f7270;--ln:#dbe4e2;--ac:#0f766e;--ac2:#e3f4f1;--bt:#fff;--nv:#0b3532;--sh:0 1px 2px rgba(15,40,38,.06),0 6px 16px rgba(15,40,38,.05);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1514;--card:#15201f;--tx:#e5efed;--mu:#8fa5a2;--ln:#26373a;--ac:#4fd1c0;--ac2:#163533;--bt:#062321;--nv:#08201e;--sh:none}}
+:root[data-theme="dark"]{--bg:#0d1514;--card:#15201f;--tx:#e5efed;--mu:#8fa5a2;--ln:#26373a;--ac:#4fd1c0;--ac2:#163533;--bt:#062321;--nv:#08201e;--sh:none}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.5 "Plus Jakarta Sans","Segoe UI",system-ui,sans-serif}
+.wrap{display:flex;min-height:100vh}
+nav{width:220px;padding:22px 12px;background:var(--nv);flex:none}
+nav h1{font:700 18px "Sora","Segoe UI",sans-serif;color:#fff;margin:0 8px 22px}
+nav h1 small{display:block;font:400 12px "Plus Jakarta Sans","Segoe UI",sans-serif;color:#8fd3c9;margin-top:2px}
+nav button{display:block;width:100%;text-align:left;background:none;border:0;color:#c5dedb;padding:10px 12px;border-radius:8px;font:inherit;font-weight:500;cursor:pointer;margin-bottom:2px}
+nav button:hover{background:rgba(255,255,255,.08)}
+nav button.on{background:var(--ac);color:var(--bt);font-weight:600}
+main{flex:1;padding:28px 32px;min-width:0;max-width:1080px}
+h2{margin:0 0 16px;font:700 24px "Sora","Segoe UI",sans-serif;letter-spacing:-.01em}
+.card{background:var(--card);border:1px solid var(--ln);border-radius:12px;padding:16px;margin-bottom:16px;box-shadow:var(--sh)}
+.sc{overflow-x:auto}
+.row{display:flex;flex-wrap:wrap;gap:8px}
+.stats{display:flex;gap:14px;margin-bottom:16px;flex-wrap:wrap}
+.stats div{flex:1;min-width:160px;background:var(--card);border:1px solid var(--ln);border-top:4px solid var(--c);border-radius:12px;padding:12px 16px;box-shadow:var(--sh)}
+.k0{--c:#3b82f6}.k1{--c:#16a34a}.k2{--c:#f59e0b}
+.stats b{display:block;font:700 22px "Sora","Segoe UI",sans-serif}
+.stats span,.mu{color:var(--mu);font-size:13px}
+input,select{padding:8px 10px;border:1px solid var(--ln);border-radius:8px;background:var(--bg);color:var(--tx);font:inherit;min-width:0}
+button{padding:8px 15px;border:0;border-radius:8px;background:var(--ac);color:var(--bt);font:inherit;font-weight:600;cursor:pointer}
+button:hover{filter:brightness(1.08)}
+button.g{background:none;color:var(--mu);padding:4px 8px;font-weight:400}
+button.s{background:none;color:var(--ac);border:1px solid var(--ac)}
+table{width:100%;border-collapse:collapse}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--ln);white-space:nowrap}
+th{font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--mu);font-weight:600}
+tr:hover td{background:var(--ac2)}
+td.r,th.r{text-align:right}
+.b{font-size:12px;font-weight:600;padding:3px 10px;border-radius:99px}
+.b0{color:#3b82f6;background:rgba(59,130,246,.14)}.b1{color:#ec4899;background:rgba(236,72,153,.14)}.b2{color:#d97706;background:rgba(245,158,11,.16)}.b3{color:#8b5cf6;background:rgba(139,92,246,.14)}
+select.sel{font-weight:600;border-color:currentColor;background:transparent}
+.s0{color:#64748b}.s1{color:#3b82f6}.s2{color:#16a34a}.s3{color:#dc2626}.s4{color:#d97706}
+:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+@media(max-width:700px){.wrap{flex-direction:column}nav{width:auto;display:flex;gap:4px;padding:10px;overflow-x:auto}nav h1{display:none}nav button{width:auto;white-space:nowrap;margin:0}main{padding:16px}}
+</style></head><body>
+<div class="wrap"><nav id="nav"></nav><main id="app"></main></div>
+<script>
+const K='gestion-proto-v1';
+let S=null;
+try{S=JSON.parse(localStorage.getItem(K))}catch(e){}
+if(!S)S={n:20,qn:3,
+c:[{id:1,n:'Plásticos Andinos SAC',t:'proveedor',d:'20512345678',c:'Lima',p:'999 000 111',pe:[{n:'Carlos Ramos',r:'Ventas',p:'999 100 003',e:''}]},
+{id:2,n:'Envases del Norte SRL',t:'proveedor',d:'20498765432',c:'Chiclayo',p:'999 000 222'},
+{id:3,n:'Distribuidora Pacífico SAC',t:'cliente',d:'20601234567',c:'Lima',p:'999 000 333',pe:[{n:'Rosa Medina',r:'Compras',p:'999 100 001',e:'rosa@ejemplo.pe'},{n:'Luis Paredes',r:'Almacén',p:'999 100 002',e:''}]},
+{id:4,n:'María Quispe',t:'cliente',d:'45678912',c:'Arequipa',p:'999 000 444'},
+{id:5,n:'Agroexport Sol SAC',t:'cliente',d:'20555666777',c:'Piura',p:'999 000 555'}],
+p:[{id:6,n:'Balde industrial 20 L',cat:'Industrial',pv:1,cost:8.5,price:12.9},
+{id:7,n:'Set de tapers x3',cat:'Uso familiar',pv:1,cost:6,price:9.5},
+{id:8,n:'Botella personalizada 500 ml',cat:'Merchandising',pv:2,cost:2.8,price:4.5},
+{id:9,n:'Film stretch 18" rollo',cat:'Embalaje',pv:2,cost:22,price:29.9}],
+q:[{id:10,num:'COT-001',cl:3,d:'2026-10-05',st:'Enviada',items:[{p:6,q:50,pr:12.9}]},
+{id:11,num:'COT-002',cl:4,d:'2026-10-08',st:'Aceptada',items:[{p:7,q:10,pr:9.5}]}],
+o:[{id:12,q:11,pv:1,dest:'Arequipa',ag:'Agencia Norte Express',gu:'',ec:'Comprado',ee:'Pendiente'}]};
+S.c.forEach(x=>{x.pe=x.pe||[]});S.o=S.o||[];
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fm=n=>'S/ '+Number(n||0).toLocaleString('es-PE',{minimumFractionDigits:2,maximumFractionDigits:2});
+const cn=id=>(S.c.find(x=>x.id==id)||{}).n||'—';
+const pr=id=>S.p.find(x=>x.id==id)||{n:'(eliminado)',cost:0,price:0};
+const CATS=['Industrial','Uso familiar','Merchandising','Embalaje'],ST=['Borrador','Enviada','Aceptada','Perdida'];
+const OC=['Por comprar','Comprado','En fabricación','Recibido'],OE=['Pendiente','En ruta','Entregado'];
+const M={Borrador:0,Enviada:1,Aceptada:2,Perdida:3,'Por comprar':0,Comprado:1,'En fabricación':4,Recibido:2,Pendiente:0,'En ruta':1,Entregado:2};
+const bc=c=>'b b'+Math.max(0,CATS.indexOf(c));
+const sel=(a,v,f)=>`<select class="sel s${M[v]}" onchange="${f}">${opts(a,v)}</select>`;
+let tab='q',fl='todos',D=null,ex=0;
+const tot=it=>{let s=0,c=0;it.forEach(i=>{s+=i.q*i.pr;c+=i.q*pr(i.p).cost});return{sub:s,igv:s*.18,tot:s*1.18,mg:s?(s-c)/s*100:0}};
+const kind=d=>d.length==11?'Empresa':d.length==8?'Persona natural':'';
+const opts=(a,sel)=>a.map(o=>`<option ${o==sel?'selected':''}>${o}</option>`).join('');
+
+function addC(){const n=$('cn').value.trim();if(!n)return;S.c.push({id:S.n++,n,t:$('ct').value,d:$('cd').value.trim(),c:$('cc').value.trim(),p:$('cp').value.trim(),pe:$('cx').value.trim()?[{n:$('cx').value.trim(),r:'',p:'',e:''}]:[]});save();go()}
+function addP(){const n=$('pn').value.trim();if(!n)return;S.p.push({id:S.n++,n,cat:$('pc').value,pv:+$('pv').value||0,cost:+$('pk').value||0,price:+$('pp').value||0});save();go()}
+function del(k,id){S[k]=S[k].filter(x=>x.id!=id);save();go()}
+function addPe(id){const n=$('xn').value.trim();if(!n)return;S.c.find(x=>x.id==id).pe.push({n,r:$('xr').value.trim(),p:$('xp').value.trim(),e:$('xe').value.trim()});save();go()}
+function delPe(id,i){S.c.find(x=>x.id==id).pe.splice(i,1);save();go()}
+const pex=x=>`<tr><td colspan="7" style="white-space:normal;background:var(--bg)"><b>Personas de contacto de ${esc(x.n)}</b>${(x.pe||[]).map((p,i)=>`<div class="row" style="padding:6px 0;align-items:center"><span>${esc(p.n)}</span><span class="mu">${esc(p.r)} ${esc(p.p)} ${esc(p.e)}</span><button class="g" onclick="delPe(${x.id},${i})" aria-label="Quitar">✕</button></div>`).join('')||'<div class="mu" style="padding:6px 0">Aún no hay personas de contacto.</div>'}<div class="row" style="margin-top:8px"><input id="xn" placeholder="Nombre"><input id="xr" placeholder="Cargo"><input id="xp" placeholder="Teléfono"><input id="xe" placeholder="Correo"><button class="s" onclick="addPe(${x.id})">Agregar persona</button></div></tr>`;
+function addO(){const q=$('oq').value;if(!q)return;S.o.unshift({id:S.n++,q:+q,pv:+$('opv').value||0,dest:$('od').value.trim(),ag:$('oa').value.trim(),gu:'',ec:'Por comprar',ee:'Pendiente'});save();go()}
+function setO(id,k,v){S.o.find(x=>x.id==id)[k]=v;save();go()}
+function setSt(id,v){S.q.find(x=>x.id==id).st=v;save();go()}
+function newQ(){const c=S.c.find(x=>x.t=='cliente');D={cl:c?c.id:0,pe:'',items:[]};go()}
+function addL(){const p=pr(+$('ep').value);if(!S.p.length)return;D.items.push({p:+$('ep').value,q:+$('eq').value||1,pr:p.price});go()}
+function updL(i,k,v){D.items[i][k]=+v||0;go()}
+function saveQ(){if(!D.cl||!D.items.length)return;S.q.unshift({id:S.n++,num:'COT-'+String(S.qn++).padStart(3,'0'),cl:+D.cl,pe:D.pe||'',d:new Date().toISOString().slice(0,10),st:'Borrador',items:D.items});D=null;save();go()}
+
+function vC(){const l=S.c.filter(x=>fl=='todos'||x.t==fl);
+return `<h2>Contactos</h2>
+<div class="card"><div class="row"><input id="cn" placeholder="Nombre o razón social"><select id="ct"><option>cliente<option>proveedor</select><input id="cd" placeholder="RUC o DNI"><input id="cc" placeholder="Ciudad"><input id="cp" placeholder="Teléfono"><input id="cx" placeholder="Persona de contacto"><button onclick="addC()">Agregar contacto</button></div></div>
+<div class="row" style="margin-bottom:10px"><select onchange="fl=this.value;go()">${opts(['todos','cliente','proveedor'],fl)}</select></div>
+<div class="card sc"><table><tr><th>Nombre<th>Tipo<th>RUC / DNI<th>Ciudad<th>Teléfono<th>Personas de contacto<th></tr>${l.map(x=>`<tr><td>${esc(x.n)}<td>${x.t}<td>${esc(x.d)} <span class="mu">${kind(x.d)}</span><td>${esc(x.c)}<td>${esc(x.p)}<td>${(x.pe||[]).map(q=>esc(q.n)).join(', ')||'<span class="mu">Sin contacto</span>'} <button class="g" onclick="ex=ex==${x.id}?0:${x.id};go()">${ex==x.id?'Cerrar':'Gestionar'}</button><td><button class="g" onclick="del('c',${x.id})" aria-label="Eliminar">✕</button></tr>${ex==x.id?pex(x):''}`).join('')||'<tr><td colspan="7" class="mu">Aún no hay contactos. Agrega el primero arriba.</tr>'}</table></div>`}
+
+function vP(){const pv=S.c.filter(x=>x.t=='proveedor');
+return `<h2>Catálogo</h2>
+<div class="card"><div class="row"><input id="pn" placeholder="Producto"><select id="pc">${opts(CATS)}</select><select id="pv">${pv.map(x=>`<option value="${x.id}">${esc(x.n)}</option>`).join('')}</select><input id="pk" type="number" step="0.01" placeholder="Costo S/" style="width:100px"><input id="pp" type="number" step="0.01" placeholder="Precio S/" style="width:100px"><button onclick="addP()">Agregar producto</button></div></div>
+<div class="card sc"><table><tr><th>Producto<th>Categoría<th>Proveedor<th class="r">Costo<th class="r">Precio<th class="r">Margen<th></tr>${S.p.map(x=>`<tr><td>${esc(x.n)}<td><span class="${bc(x.cat)}">${x.cat}</span><td>${esc(cn(x.pv))}<td class="r">${fm(x.cost)}<td class="r">${fm(x.price)}<td class="r">${x.price?((x.price-x.cost)/x.price*100).toFixed(1):0}%<td><button class="g" onclick="del('p',${x.id})" aria-label="Eliminar">✕</button></tr>`).join('')||'<tr><td colspan="7" class="mu">Aún no hay productos. Agrega el primero arriba.</tr>'}</table></div>`}
+
+function vE(){const t=tot(D.items),cl=S.c.filter(x=>x.t=='cliente');
+return `<h2>Nueva cotización</h2>
+<div class="card"><div class="row"><select onchange="D.cl=this.value;D.pe='';go()">${cl.map(x=>`<option value="${x.id}" ${x.id==D.cl?'selected':''}>${esc(x.n)}</option>`).join('')}</select><select onchange="D.pe=this.value"><option value="">Sin persona de contacto</option>${((S.c.find(x=>x.id==D.cl)||{}).pe||[]).map(q=>`<option ${q.n==D.pe?'selected':''}>${esc(q.n)}</option>`).join('')}</select><select id="ep">${S.p.map(x=>`<option value="${x.id}">${esc(x.n)} · ${fm(x.price)}</option>`).join('')}</select><input id="eq" type="number" min="1" value="1" style="width:80px"><button class="s" onclick="addL()">Agregar producto</button></div></div>
+<div class="card sc"><table><tr><th>Producto<th class="r">Cantidad<th class="r">Precio unit.<th class="r">Subtotal<th></tr>${D.items.map((i,n)=>`<tr><td>${esc(pr(i.p).n)}<td class="r"><input type="number" min="1" value="${i.q}" style="width:80px" onchange="updL(${n},'q',this.value)"><td class="r"><input type="number" step="0.01" value="${i.pr}" style="width:90px" onchange="updL(${n},'pr',this.value)"><td class="r">${fm(i.q*i.pr)}<td><button class="g" onclick="D.items.splice(${n},1);go()" aria-label="Quitar">✕</button></tr>`).join('')||'<tr><td colspan="5" class="mu">Agrega productos para armar la cotización.</tr>'}</table>
+<p class="r" style="text-align:right;margin:12px 0 0">Subtotal ${fm(t.sub)} · IGV 18% ${fm(t.igv)} · <b>Total ${fm(t.tot)}</b><br><span class="mu">Margen ${t.mg.toFixed(1)}%</span></p></div>
+<div class="row"><button onclick="saveQ()">Guardar cotización</button><button class="s" onclick="D=null;go()">Cancelar</button></div>`}
+
+function vQ(){if(D)return vE();
+const ab=S.q.filter(x=>x.st=='Enviada').length,ac=S.q.filter(x=>x.st=='Aceptada').reduce((a,x)=>a+tot(x.items).tot,0);
+return `<h2>Cotizaciones</h2>
+<div class="stats"><div class="k0"><b>${ab}</b><span>Enviadas, esperando respuesta</span></div><div class="k1"><b>${fm(ac)}</b><span>Total aceptado (con IGV)</span></div><div class="k2"><b>${S.q.length}</b><span>Cotizaciones en total</span></div></div>
+<div class="row" style="margin-bottom:10px"><button onclick="newQ()">Nueva cotización</button></div>
+<div class="card sc"><table><tr><th>N°<th>Cliente<th>Fecha<th class="r">Total<th class="r">Margen<th>Estado<th></tr>${S.q.map(x=>{const t=tot(x.items);return `<tr><td>${x.num}<td>${esc(cn(x.cl))}${x.pe?`<br><span class="mu">Contacto: ${esc(x.pe)}</span>`:''}<td>${x.d}<td class="r">${fm(t.tot)}<td class="r">${t.mg.toFixed(1)}%<td>${sel(ST,x.st,`setSt(${x.id},this.value)`)}<td><button class="g" onclick="del('q',${x.id})" aria-label="Eliminar">✕</button></tr>`}).join('')||'<tr><td colspan="7" class="mu">Aún no hay cotizaciones. Crea la primera.</tr>'}</table></div>`}
+
+function vO(){const aq=S.q.filter(x=>x.st=='Aceptada'),pv=S.c.filter(x=>x.t=='proveedor');
+return `<h2>Pedidos y envíos</h2>
+<div class="card"><div class="row"><select id="oq">${aq.map(x=>`<option value="${x.id}">${x.num} · ${esc(cn(x.cl))}</option>`).join('')||'<option value="">Sin cotizaciones aceptadas</option>'}</select><select id="opv">${pv.map(x=>`<option value="${x.id}">${esc(x.n)}</option>`).join('')}</select><input id="od" placeholder="Destino (ciudad)"><input id="oa" placeholder="Agencia de transporte"><button onclick="addO()">Crear pedido</button></div></div>
+<div class="card sc"><table><tr><th>Cotización<th>Proveedor<th>Destino<th>Agencia<th>Guía<th>Compra<th>Envío<th></tr>${S.o.map(x=>{const q=S.q.find(y=>y.id==x.q);return `<tr><td>${q?q.num:'—'}<br><span class="mu">${q?esc(cn(q.cl)):''}</span><td>${esc(cn(x.pv))}<td>${esc(x.dest)}<td>${esc(x.ag)}<td><input value="${esc(x.gu)}" placeholder="N° de guía" style="width:120px" onchange="setO(${x.id},'gu',this.value)"><td>${sel(OC,x.ec,`setO(${x.id},'ec',this.value)`)}<td>${sel(OE,x.ee,`setO(${x.id},'ee',this.value)`)}<td><button class="g" onclick="del('o',${x.id})" aria-label="Eliminar">✕</button></tr>`}).join('')||'<tr><td colspan="8" class="mu">Aún no hay pedidos. Crea uno desde una cotización aceptada.</tr>'}</table></div>`}
+function go(){
+$('nav').innerHTML='<h1>Gestión<small>Panel de la empresa</small></h1>'+[['q','📋 Cotizaciones'],['o','🚚 Pedidos y envíos'],['p','📦 Catálogo'],['c','👥 Contactos']].map(([k,l])=>`<button class="${tab==k?'on':''}" onclick="tab='${k}';D=null;go()">${l}</button>`).join('');
+$('app').innerHTML=tab=='o'?vO():tab=='c'?vC():tab=='p'?vP():vQ()}
+go();
+</script></body></html>
